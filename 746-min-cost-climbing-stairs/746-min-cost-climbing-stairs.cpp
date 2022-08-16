@@ -2,11 +2,11 @@ class Solution {
 public:    
     vector<int>dp;
     int n;
-    int bin(vector<int>&v,int i,int sum)
+    int bin(vector<int>&v,int i)
     {
         if(i==n)
         {
-            return sum;
+            return 0;
         }
         else if(i>n)
         {
@@ -18,7 +18,7 @@ public:
             return dp[i];
         }
         
-        dp[i]=v[i]+min(bin(v,i+1,sum),bin(v,i+2,sum));
+        dp[i]=v[i]+min(bin(v,i+1),bin(v,i+2));
         return dp[i];
     }
     
@@ -26,6 +26,6 @@ public:
     {
         n=v.size();
         dp.resize(n+1,-1);
-        return min(bin(v,1,0),bin(v,0,0));  
+        return min(bin(v,1),bin(v,0));  
     }
 };
